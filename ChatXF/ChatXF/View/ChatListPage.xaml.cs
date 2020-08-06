@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChatXF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace ChatXF.View {
     public partial class ChatListPage : ContentPage {
         public ChatListPage() {
             InitializeComponent();
+            BindingContext = new ChatListViewModel();
         }
     }
 }

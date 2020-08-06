@@ -4,17 +4,29 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ChatXF.View.ChatListPage">
+             x:Class="ChatXF.View.ChatListPage"
+             Title="Chats">
     <ContentPage.ToolbarItems>
-        
+        <ToolbarItem IconImageSource="add.png" Text="Adicionar" Command="{Binding AdicionarCommand}"/>
+        <ToolbarItem IconImageSource="refresh.png" Text="Atualizar" Command="{Binding AtualizarCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ListView>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding nome}" TextColor="{StaticResource primaryDarkColor}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <StackLayout 
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand"
+            Padding="10">
+            <ListView ItemsSource="{Binding ChatList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="15">
+                                <Label Text="{Binding nome}" FontSize="22" TextColor="{StaticResource primaryDarkColor}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>
