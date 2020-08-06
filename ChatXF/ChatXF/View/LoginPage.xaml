@@ -4,12 +4,30 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ChatXF.View.LoginPage">
+             x:Class="ChatXF.View.LoginPage"
+             BackgroundColor="{StaticResource primaryColor}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="10" 
+                     VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="CenterAndExpand"
+                     WidthRequest="300">
+            <Label Text="ChatXF"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   FontSize="36"
+                   Margin="0, 20"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"/>
+            <Entry BackgroundColor="White" 
+                   TextColor="{StaticResource primaryDarkColor}"
+                   Placeholder="Usuário"/>
+            <Entry BackgroundColor="White" 
+                   TextColor="{StaticResource primaryDarkColor}"
+                   Placeholder="Senha"/>
+            <Button Text="Entrar" 
+                        BackgroundColor="{StaticResource primaryDarkColor}"
+                        TextColor="White"
+                        FontAttributes="Bold"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
