@@ -18,9 +18,10 @@
                    Margin="0, 20"
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand"/>
-            <Entry Placeholder="Usuário"/>
-            <Entry Placeholder="Senha"/>
-            <Button Text="Entrar"/>
+            <Entry Placeholder="Usuário" Text="{Binding Nome}"/>
+            <Entry Placeholder="Senha" IsPassword="True" Text="{Binding Senha}"/>
+            <Button Text="Entrar" Command="{Binding EntrarCommand}"/>
+            <Label Text="{Binding Error}" TextColor="White"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

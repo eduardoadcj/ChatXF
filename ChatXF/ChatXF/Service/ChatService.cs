@@ -7,12 +7,12 @@ using System.Net.Http;
 using System.Text;
 
 namespace ChatXF.Service {
-    public class Service {
+    public class ChatService {
 
-        private const string URL = "";
+        private const string URL = "http://ws.spacedu.com.br/xf2018/rest/api";
         private HttpClient _HttpClient;
 
-        public Service() {
+        public ChatService() {
             _HttpClient = new HttpClient();
         }
 
@@ -24,7 +24,9 @@ namespace ChatXF.Service {
             HttpResponseMessage response = _HttpClient.PostAsync(URL + "/usuario", content)
                 .GetAwaiter().GetResult();
             if(response.StatusCode == HttpStatusCode.OK) {
-                
+                var contentResponse = response.Content.ReadAsStringAsync()
+                    .GetAwaiter().GetResult();
+                return JsonConvert.DeserializeObject<Usuario>(contentResponse);
             }
             return null;
         }
