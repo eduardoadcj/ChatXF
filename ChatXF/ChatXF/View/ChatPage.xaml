@@ -7,9 +7,29 @@
              x:Class="ChatXF.View.ChatPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            
+            <ScrollView>
+                <StackLayout>
+                    
+                    <Frame OutlineColor="{StaticResource primaryDarkColor}" HorizontalOptions="Start">
+                        <StackLayout>
+                            <Label Text="Usuario" FontSize="10" TextColor="{StaticResource primaryDarkColor}"/>
+                            <Label Text="Mensagem...." TextColor="{StaticResource primaryDarkColor}"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <StackLayout Padding="10" BackgroundColor="{StaticResource primaryColor}">
+                        <Label Text="Minha mensagem" />
+                    </StackLayout>
+                    
+                </StackLayout>
+            </ScrollView>
+            
+            <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="Mensagem..." HorizontalOptions="FillAndExpand"/>
+                <Button Text="Enviar"/>
+            </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

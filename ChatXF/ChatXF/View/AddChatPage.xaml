@@ -9,9 +9,7 @@
              Title="Novo chat">
     <ContentPage.Content>
         <StackLayout>
-            <Entry Placeholder="Nome do chat" 
-                   BackgroundColor="White" 
-                   TextColor="{StaticResource primaryDarkColor}"/>
+            <Entry Placeholder="Nome do chat"/>
             <Button Text="Criar"/>
         </StackLayout>
     </ContentPage.Content>

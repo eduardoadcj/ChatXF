@@ -15,6 +15,11 @@
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource primaryDarkColor}"/>
             </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="TextColor" Value="{StaticResource primaryDarkColor}"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

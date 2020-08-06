@@ -18,12 +18,8 @@
                    Margin="0, 20"
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="CenterAndExpand"/>
-            <Entry BackgroundColor="White" 
-                   TextColor="{StaticResource primaryDarkColor}"
-                   Placeholder="Usuário"/>
-            <Entry BackgroundColor="White" 
-                   TextColor="{StaticResource primaryDarkColor}"
-                   Placeholder="Senha"/>
+            <Entry Placeholder="Usuário"/>
+            <Entry Placeholder="Senha"/>
             <Button Text="Entrar"/>
         </StackLayout>
     </ContentPage.Content>
