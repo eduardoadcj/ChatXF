@@ -4,12 +4,15 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ChatXF.View.AddChatPage">
+             x:Class="ChatXF.View.AddChatPage"
+             BackgroundColor="{StaticResource primaryColor}"
+             Title="Novo chat">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Entry Placeholder="Nome do chat" 
+                   BackgroundColor="White" 
+                   TextColor="{StaticResource primaryDarkColor}"/>
+            <Button Text="Criar"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

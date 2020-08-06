@@ -9,6 +9,12 @@
         <ResourceDictionary>
             <Color x:Key="primaryColor">#77dd77</Color>
             <Color x:Key="primaryDarkColor">#5CAB5C</Color>
+
+            <Style TargetType="Button">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource primaryDarkColor}"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

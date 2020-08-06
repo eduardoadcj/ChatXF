@@ -24,10 +24,7 @@
             <Entry BackgroundColor="White" 
                    TextColor="{StaticResource primaryDarkColor}"
                    Placeholder="Senha"/>
-            <Button Text="Entrar" 
-                        BackgroundColor="{StaticResource primaryDarkColor}"
-                        TextColor="White"
-                        FontAttributes="Bold"/>
+            <Button Text="Entrar"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
