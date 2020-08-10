@@ -8,9 +8,10 @@
              BackgroundColor="{StaticResource primaryColor}"
              Title="Novo chat">
     <ContentPage.Content>
-        <StackLayout>
-            <Entry Placeholder="Nome do chat"/>
-            <Button Text="Criar"/>
+        <StackLayout Padding="10">
+            <Entry Text="{Binding Nome}" Placeholder="Nome do chat"/>
+            <Button Text="Criar" Command="{Binding SalvarCommand}"/>
+            <Label Text="{Binding Error}" TextColor="White"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
