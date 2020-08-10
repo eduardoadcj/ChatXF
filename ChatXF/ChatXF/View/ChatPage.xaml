@@ -29,8 +29,8 @@
             </ScrollView>
             
             <StackLayout Orientation="Horizontal">
-                <Entry Placeholder="Mensagem..." HorizontalOptions="FillAndExpand"/>
-                <Button Text="Enviar"/>
+                <Entry Text="{Binding Mensagem}" Placeholder="Mensagem..." HorizontalOptions="FillAndExpand"/>
+                <Button Text="Enviar" Command="{Binding EnviarCommand}"/>
             </StackLayout>
             
         </StackLayout>

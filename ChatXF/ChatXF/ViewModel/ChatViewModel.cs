@@ -38,8 +38,20 @@ namespace ChatXF.ViewModel {
                 ShowOnScreen();
             }
         }
+
+        private string _Mensagem;
+        public string Mensagem {
+            get { return _Mensagem; }
+            set {
+                _Mensagem = value;
+                OnPropertyChanged("Mensagem");
+            }
+        }
+
+        public Command EnviarCommand { get; set; }
         
         public ChatViewModel(Chat chat, StackLayout messageContainer) {
+            EnviarCommand = new Command(Enviar);
             _UserSession = new UserSessionManager();
             _Service = new ChatService();
             _MessageContainer = messageContainer;
@@ -103,6 +115,20 @@ namespace ChatXF.ViewModel {
             };
             layout.Children.Add(label);
             return layout;
+        }
+
+        private void Enviar() {
+            if (Mensagem == null || Mensagem.Length == 0)
+                return;
+            var user = _UserSession.GetUsuario();
+            var msg = new Mensagem() {
+                id_usuario = user.id,
+                mensagem = Mensagem,
+                id_chat = CurrentChat.id
+            };
+            if(_Service.InsertMensagem(msg))
+                Mensagem = "";
+            UpdateChat();
         }
 
     }
