@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -92,6 +93,9 @@ namespace ChatXF.Service {
             });
             HttpResponseMessage response = _HttpClient.PostAsync(URL + "/chat/" + mensagem.id_chat + "/msg", content)
                 .GetAwaiter().GetResult();
+
+            Debug.WriteLine("Retorno envio da mensagem: " + response.StatusCode);
+
             return response.StatusCode == HttpStatusCode.OK;
         }
 
