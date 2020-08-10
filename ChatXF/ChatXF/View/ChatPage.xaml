@@ -4,22 +4,25 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ChatXF.View.ChatPage">
+             x:Class="ChatXF.View.ChatPage"
+             Title="{Binding CurrentChat.nome}">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="10">
             
             <ScrollView>
-                <StackLayout>
+                <StackLayout x:Name="MessageContainer" Padding="10">
                     
                     <Frame OutlineColor="{StaticResource primaryDarkColor}" HorizontalOptions="Start">
                         <StackLayout>
                             <Label Text="Usuario" FontSize="10" TextColor="{StaticResource primaryDarkColor}"/>
-                            <Label Text="Mensagem...." TextColor="{StaticResource primaryDarkColor}"/>
+                            <Label Text="Mensagem..." TextColor="{StaticResource primaryDarkColor}"/>
                         </StackLayout>
                     </Frame>
 
-                    <StackLayout Padding="10" BackgroundColor="{StaticResource primaryColor}">
-                        <Label Text="Minha mensagem" />
+                    <StackLayout Padding="15" 
+                                 BackgroundColor="{StaticResource primaryColor}"
+                                 HorizontalOptions="End">
+                        <Label Text="Minha mensagem" TextColor="White" />
                     </StackLayout>
                     
                 </StackLayout>

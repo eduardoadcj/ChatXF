@@ -1,4 +1,5 @@
-﻿using ChatXF.ViewModel;
+﻿using ChatXF.Model;
+using ChatXF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,10 @@ using Xamarin.Forms.Xaml;
 namespace ChatXF.View {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChatPage : ContentPage {
-        public ChatPage() {
+        public ChatPage(Chat chat) {
             InitializeComponent();
-            BindingContext = new ChatViewModel();
+            Title = chat.nome;
+            BindingContext = new ChatViewModel(chat, MessageContainer);
         }
     }
 }

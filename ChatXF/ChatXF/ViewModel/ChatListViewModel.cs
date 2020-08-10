@@ -20,6 +20,16 @@ namespace ChatXF.ViewModel {
 
         private ChatService _Service;
 
+        private Chat _SelectedChat;
+        public Chat SelectedChat {
+            get { return _SelectedChat; }
+            set {
+                _SelectedChat = value;
+                OnPropertyChanged("SelectedChat");
+                GoPaginaChat(value);
+            }
+        }
+
         private List<Chat> _ChatList;
         public List<Chat> ChatList { 
             get { return _ChatList; }
@@ -46,6 +56,12 @@ namespace ChatXF.ViewModel {
         private void Atualizar() {
             ChatList = _Service.GetChats();
             ChatList = ChatList.OrderBy(a => a.nome).ToList();
+        }
+
+        private void GoPaginaChat(Chat chat) {
+            if (chat == null)
+                return;
+            ((NavigationPage)App.Current.MainPage).Navigation.PushAsync(new ChatPage(chat));
         }
 
     }

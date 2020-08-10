@@ -1,5 +1,6 @@
 ﻿using ChatXF.Model;
 using ChatXF.Service;
+using ChatXF.Util;
 using ChatXF.View;
 using Newtonsoft.Json;
 using System;
@@ -71,7 +72,7 @@ namespace ChatXF.ViewModel {
                 Error = "Usuário não encontrado.";
                 return;
             }
-            App.Current.Properties["LOGIN"] = JsonConvert.SerializeObject(usu);
+            new UserSessionManager().SetUsuario(usuario);
             App.Current.MainPage = new NavigationPage(new ChatListPage());
         }
 
