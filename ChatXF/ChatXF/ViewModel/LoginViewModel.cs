@@ -72,7 +72,7 @@ namespace ChatXF.ViewModel {
                 Error = "Usuário não encontrado.";
                 return;
             }
-            new UserSessionManager().SetUsuario(usuario);
+            new UserSessionManager().SetUsuario(usu);
             App.Current.MainPage = new NavigationPage(new ChatListPage());
         }
 
