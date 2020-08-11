@@ -62,6 +62,7 @@ namespace ChatXF.ViewModel {
             if (chat == null)
                 return;
             ((NavigationPage)App.Current.MainPage).Navigation.PushAsync(new ChatPage(chat));
+            SelectedChat = null;
         }
 
     }
