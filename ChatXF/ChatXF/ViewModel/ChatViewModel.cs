@@ -49,9 +49,11 @@ namespace ChatXF.ViewModel {
         }
 
         public Command EnviarCommand { get; set; }
+        public Command AtualizarCommand { get; set; }
         
         public ChatViewModel(Chat chat, StackLayout messageContainer) {
             EnviarCommand = new Command(Enviar);
+            AtualizarCommand = new Command(UpdateChat);
             _UserSession = new UserSessionManager();
             _Service = new ChatService();
             _MessageContainer = messageContainer;

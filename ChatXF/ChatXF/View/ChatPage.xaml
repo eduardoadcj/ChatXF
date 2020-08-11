@@ -6,6 +6,11 @@
              mc:Ignorable="d"
              x:Class="ChatXF.View.ChatPage"
              Title="{Binding CurrentChat.nome}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Atualizar" IconImageSource="refresh.png" Command="{Binding AtualizarCommand}"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout Padding="10">
             
