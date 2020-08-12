@@ -5,35 +5,58 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ChatXF.View.ChatPage"
-             Title="{Binding CurrentChat.nome}">
+             Title="{Binding CurrentChat.nome}"
+             xmlns:util="clr-namespace:ChatXF.Util">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="mensagemTemplate">
+                <ViewCell>
+                    <Frame OutlineColor="{StaticResource primaryDarkColor}" HorizontalOptions="Start" Padding="10" Margin="5">
+                        <StackLayout>
+                            <Label Text="{Binding usuario.nome}" FontSize="10" TextColor="{StaticResource primaryDarkColor}"/>
+                            <Label Text="{Binding mensagem}" TextColor="{StaticResource primaryDarkColor}"/>
+                        </StackLayout>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="mensagemUsuarioTemplate">
+                <ViewCell>
+                    <StackLayout>
+                        <StackLayout Padding="15"
+                                 Margin="5"
+                                 BackgroundColor="{StaticResource primaryColor}"
+                                 HorizontalOptions="End">
+                            <Label Text="{Binding mensagem}" TextColor="White" 
+                               />
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <util:MensagemDataTemplateSelector 
+                x:Key="mensagemDataTemplateSelector"
+                MensagemUsuarioTemplate="{StaticResource mensagemUsuarioTemplate}"
+                MensagemTemplate="{StaticResource mensagemTemplate}"/>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Atualizar" IconImageSource="refresh.png" Command="{Binding AtualizarCommand}"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
         <StackLayout Padding="10">
-            
-            <ScrollView>
-                <StackLayout x:Name="MessageContainer" Padding="10">
-                    
-                    <Frame OutlineColor="{StaticResource primaryDarkColor}" HorizontalOptions="Start">
-                        <StackLayout>
-                            <Label Text="Usuario" FontSize="10" TextColor="{StaticResource primaryDarkColor}"/>
-                            <Label Text="Mensagem..." TextColor="{StaticResource primaryDarkColor}"/>
-                        </StackLayout>
-                    </Frame>
 
-                    <StackLayout Padding="15" 
-                                 BackgroundColor="{StaticResource primaryColor}"
-                                 HorizontalOptions="End">
-                        <Label Text="Minha mensagem" TextColor="White" />
-                    </StackLayout>
-                    
-                </StackLayout>
-            </ScrollView>
-            
-            <StackLayout Orientation="Horizontal">
+            <ListView ItemsSource="{Binding Mensagens}" 
+                      HorizontalOptions="FillAndExpand"
+                      HasUnevenRows="True"
+                      ItemTemplate="{StaticResource mensagemDataTemplateSelector}"/>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
                 <Entry Text="{Binding Mensagem}" Placeholder="Mensagem..." HorizontalOptions="FillAndExpand"/>
                 <Button Text="Enviar" Command="{Binding EnviarCommand}"/>
             </StackLayout>

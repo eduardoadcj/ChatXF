@@ -16,7 +16,6 @@ namespace ChatXF.ViewModel {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private StackLayout _MessageContainer;
         private UserSessionManager _UserSession;
         private ChatService _Service;
         
@@ -35,7 +34,6 @@ namespace ChatXF.ViewModel {
             set {
                 _Mensagens = value;
                 OnPropertyChanged("Mensagens");
-                ShowOnScreen();
             }
         }
 
@@ -51,72 +49,17 @@ namespace ChatXF.ViewModel {
         public Command EnviarCommand { get; set; }
         public Command AtualizarCommand { get; set; }
         
-        public ChatViewModel(Chat chat, StackLayout messageContainer) {
+        public ChatViewModel(Chat chat) {
             EnviarCommand = new Command(Enviar);
             AtualizarCommand = new Command(UpdateChat);
             _UserSession = new UserSessionManager();
             _Service = new ChatService();
-            _MessageContainer = messageContainer;
             CurrentChat = chat;
             UpdateChat();
         }
 
         private void UpdateChat() {
             Mensagens = _Service.GetMensagensChat(CurrentChat);
-        }
-
-        private void ShowOnScreen() {
-            _MessageContainer.Children.Clear();
-
-            if (Mensagens == null)
-                return;
-
-            var user = _UserSession.GetUsuario();
-            foreach (var msg in Mensagens) {
-                if(msg.usuario.id == user.id) {
-                    _MessageContainer.Children.Add(CreateUserMessage(msg));
-                } else {
-                    _MessageContainer.Children.Add(CreateMessage(msg));
-                }
-            }
-
-        }
-
-        private Xamarin.Forms.View CreateMessage(Mensagem msg) {
-            var frame = new Frame() {
-                OutlineColor = (Color)App.Current.Resources["primaryDarkColor"],
-                HorizontalOptions = LayoutOptions.Start
-            };
-            var layout = new StackLayout();
-            var userLabel = new Label() {
-                FontSize = 10,
-                TextColor = (Color)App.Current.Resources["primaryDarkColor"],
-                Text = msg.usuario.nome
-            };
-            var mensagemLabel = new Label() {
-                TextColor = (Color)App.Current.Resources["primaryDarkColor"],
-                Text = msg.mensagem
-            };
-
-            layout.Children.Add(userLabel);
-            layout.Children.Add(mensagemLabel);
-            frame.Content = layout;
-
-            return frame;
-        }
-
-        private Xamarin.Forms.View CreateUserMessage(Mensagem msg) {
-            var layout = new StackLayout() {
-                Padding = 15,
-                BackgroundColor = (Color)App.Current.Resources["primaryColor"],
-                HorizontalOptions = LayoutOptions.End
-            };
-            var label = new Label() {
-                TextColor = Color.White,
-                Text = msg.mensagem
-            };
-            layout.Children.Add(label);
-            return layout;
         }
 
         private void Enviar() {

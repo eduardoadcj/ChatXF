@@ -15,7 +15,7 @@ namespace ChatXF.View {
         public ChatPage(Chat chat) {
             InitializeComponent();
             Title = chat.nome;
-            BindingContext = new ChatViewModel(chat, MessageContainer);
+            BindingContext = new ChatViewModel(chat);
         }
     }
 }
