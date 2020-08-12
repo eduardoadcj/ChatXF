@@ -21,6 +21,15 @@ namespace ChatXF.ViewModel {
             }
         }
 
+        private bool _Loading;
+        public bool Loading {
+            get { return _Loading; }
+            set {
+                _Loading = value;
+                OnPropertyChange("Loading");
+            }
+        }
+
         private string _Nome;
         public string Nome { 
             get { return _Nome; }
@@ -66,13 +75,16 @@ namespace ChatXF.ViewModel {
             Entrar(usu);
         }
 
-        private void Entrar(Usuario usuario) {
-            var usu = _Service.GetUsuario(usuario);
+        private async void Entrar(Usuario usuario) {
+            Loading = true;
+            var usu = await _Service.GetUsuario(usuario);
             if(usu == null) {
                 Error = "Usuário não encontrado.";
+                Loading = false;
                 return;
             }
             new UserSessionManager().SetUsuario(usu);
+            Loading = false;
             App.Current.MainPage = new NavigationPage(new ChatListPage());
         }
 

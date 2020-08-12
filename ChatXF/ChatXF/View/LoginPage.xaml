@@ -7,21 +7,29 @@
              x:Class="ChatXF.View.LoginPage"
              BackgroundColor="{StaticResource primaryColor}">
     <ContentPage.Content>
+
         <StackLayout Padding="10" 
-                     VerticalOptions="CenterAndExpand"
-                     HorizontalOptions="CenterAndExpand"
-                     WidthRequest="300">
+                         VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand"
+                         WidthRequest="300">
             <Label Text="ChatXF"
-                   FontAttributes="Bold"
-                   TextColor="White"
-                   FontSize="36"
-                   Margin="0, 20"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand"/>
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       FontSize="36"
+                       Margin="0, 20"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"/>
             <Entry Placeholder="Usuário" Text="{Binding Nome}"/>
             <Entry Placeholder="Senha" IsPassword="True" Text="{Binding Senha}"/>
             <Button Text="Entrar" Command="{Binding EntrarCommand}"/>
+            
             <Label Text="{Binding Error}" TextColor="White"/>
+
+            <StackLayout Padding="10" IsVisible="{Binding Loading}">
+                <ActivityIndicator IsRunning="{Binding Loading}" Color="White"/>
+                <Label Text="Entrando" HorizontalOptions="CenterAndExpand" TextColor="White"/>
+            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

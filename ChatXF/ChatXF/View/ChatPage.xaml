@@ -58,7 +58,10 @@
 
             <StackLayout Orientation="Horizontal" VerticalOptions="End">
                 <Entry Text="{Binding Mensagem}" Placeholder="Mensagem..." HorizontalOptions="FillAndExpand"/>
-                <Button Text="Enviar" Command="{Binding EnviarCommand}"/>
+                <StackLayout>
+                    <Button Text="Enviar" Command="{Binding EnviarCommand}"/>
+                    <ActivityIndicator IsRunning="{Binding Enviando}" IsVisible="{Binding Enviando}" Color="{StaticResource primaryDarkColor}"/>
+                </StackLayout>
             </StackLayout>
             
         </StackLayout>

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ChatXF.Service {
     public class ChatService {
@@ -17,27 +18,23 @@ namespace ChatXF.Service {
             _HttpClient = new HttpClient();
         }
 
-        public Usuario GetUsuario(Usuario usuario) {
+        public async Task<Usuario> GetUsuario(Usuario usuario) {
             FormUrlEncodedContent content = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("nome", usuario.nome),
                 new KeyValuePair<string, string>("password", usuario.password)
             });
-            HttpResponseMessage response = _HttpClient.PostAsync(URL + "/usuario", content)
-                .GetAwaiter().GetResult();
+            HttpResponseMessage response = await _HttpClient.PostAsync(URL + "/usuario", content);
             if(response.StatusCode == HttpStatusCode.OK) {
-                var contentResponse = response.Content.ReadAsStringAsync()
-                    .GetAwaiter().GetResult();
+                var contentResponse = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<Usuario>(contentResponse);
             }
             return null;
         }
 
-        public List<Chat> GetChats() {
-            HttpResponseMessage response = _HttpClient.GetAsync(URL + "/chats")
-                .GetAwaiter().GetResult();
+        public async Task<List<Chat>> GetChats() {
+            HttpResponseMessage response = await _HttpClient.GetAsync(URL + "/chats");
             if(response.StatusCode == HttpStatusCode.OK) {
-                var responseContent = response.Content.ReadAsStringAsync()
-                    .GetAwaiter().GetResult();
+                var responseContent = await response.Content.ReadAsStringAsync();
                 if(responseContent.Length > 2) {
                     return JsonConvert.DeserializeObject<List<Chat>>(responseContent);
                 } else {
@@ -47,12 +44,11 @@ namespace ChatXF.Service {
             return new List<Chat>();
         }
 
-        public bool InsertChat(Chat chat) {
+        public async Task<bool> InsertChat(Chat chat) {
             FormUrlEncodedContent content = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("nome", chat.nome)
             });
-            HttpResponseMessage response = _HttpClient.PostAsync(URL + "/chat", content)
-                .GetAwaiter().GetResult();
+            HttpResponseMessage response = await _HttpClient.PostAsync(URL + "/chat", content);
             return response.StatusCode == HttpStatusCode.OK;
         }
 
@@ -71,28 +67,25 @@ namespace ChatXF.Service {
             return response.StatusCode == HttpStatusCode.OK;
         }
 
-        public List<Mensagem> GetMensagensChat(Chat chat) {
-            HttpResponseMessage response = _HttpClient.GetAsync(URL + "/chat/" + chat.id + "/msg")
-                .GetAwaiter().GetResult();
+        public async Task<List<Mensagem>> GetMensagensChat(Chat chat) {
+            HttpResponseMessage response = await _HttpClient.GetAsync(URL + "/chat/" + chat.id + "/msg");
             if(response.StatusCode == HttpStatusCode.OK) {
-                var responseContent = response.Content.ReadAsStringAsync()
-                    .GetAwaiter().GetResult();
+                var responseContent = await response.Content.ReadAsStringAsync();
                 if(responseContent.Length > 2) {
                     return JsonConvert.DeserializeObject<List<Mensagem>>(responseContent);
                 } else {
                     return null;
                 }
             }
-            return null;
+            return new List<Mensagem>();
         }
 
-        public bool InsertMensagem(Mensagem mensagem) {
+        public async Task<bool> InsertMensagem(Mensagem mensagem) {
             FormUrlEncodedContent content = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("mensagem", mensagem.mensagem),
                 new KeyValuePair<string, string>("id_usuario", mensagem.id_usuario.ToString())
             });
-            HttpResponseMessage response = _HttpClient.PostAsync(URL + "/chat/" + mensagem.id_chat + "/msg", content)
-                .GetAwaiter().GetResult();
+            HttpResponseMessage response = await _HttpClient.PostAsync(URL + "/chat/" + mensagem.id_chat + "/msg", content);
 
             Debug.WriteLine("Retorno envio da mensagem: " + response.StatusCode);
 

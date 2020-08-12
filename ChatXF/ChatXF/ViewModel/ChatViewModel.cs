@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ChatXF.ViewModel {
@@ -18,7 +19,16 @@ namespace ChatXF.ViewModel {
 
         private UserSessionManager _UserSession;
         private ChatService _Service;
-        
+
+        private bool _Enviando;
+        public bool Enviando {
+            get { return _Enviando; }
+            set {
+                _Enviando = value;
+                OnPropertyChanged("Enviando");
+            }
+        }
+
         private Chat _CurrentChat;
         private Chat CurrentChat {
             get { return _CurrentChat; }
@@ -50,19 +60,19 @@ namespace ChatXF.ViewModel {
         public Command AtualizarCommand { get; set; }
         
         public ChatViewModel(Chat chat) {
-            EnviarCommand = new Command(Enviar);
-            AtualizarCommand = new Command(UpdateChat);
+            EnviarCommand = new Command(() => { Task.Run(Enviar); });
+            AtualizarCommand = new Command(() => { Task.Run(UpdateChat); });
             _UserSession = new UserSessionManager();
             _Service = new ChatService();
             CurrentChat = chat;
-            UpdateChat();
+            Task.Run(UpdateChat);
         }
 
-        private void UpdateChat() {
-            Mensagens = _Service.GetMensagensChat(CurrentChat);
+        private async Task UpdateChat() {
+            Mensagens = await _Service.GetMensagensChat(CurrentChat);
         }
 
-        private void Enviar() {
+        private async Task Enviar() {
             if (Mensagem == null || Mensagem.Length == 0)
                 return;
             var user = _UserSession.GetUsuario();
@@ -71,9 +81,11 @@ namespace ChatXF.ViewModel {
                 mensagem = Mensagem,
                 id_chat = CurrentChat.id
             };
-            if(_Service.InsertMensagem(msg))
+            Enviando = true;
+            if(await _Service.InsertMensagem(msg))
                 Mensagem = "";
-            UpdateChat();
+            await UpdateChat();
+            Enviando = false;
         }
 
     }

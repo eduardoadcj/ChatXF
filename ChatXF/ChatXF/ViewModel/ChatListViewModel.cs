@@ -7,6 +7,8 @@ using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace ChatXF.ViewModel {
     public class ChatListViewModel : INotifyPropertyChanged {
@@ -44,17 +46,17 @@ namespace ChatXF.ViewModel {
 
         public ChatListViewModel() {
             AdicionarCommand = new Command(Adicionar);
-            AtualizarCommand = new Command(Atualizar);
+            AtualizarCommand = new Command(() => { Task.Run(Atualizar); });
             _Service = new ChatService();
-            Atualizar();
+            Task.Run(Atualizar);
         }
 
         private void Adicionar() {
             ((NavigationPage) App.Current.MainPage).PushAsync(new AddChatPage());
         }
 
-        private void Atualizar() {
-            ChatList = _Service.GetChats();
+        private async Task Atualizar() {
+            ChatList = await _Service.GetChats();
             ChatList = ChatList.OrderBy(a => a.nome).ToList();
         }
 

@@ -12,6 +12,7 @@
             <Entry Text="{Binding Nome}" Placeholder="Nome do chat"/>
             <Button Text="Criar" Command="{Binding SalvarCommand}"/>
             <Label Text="{Binding Error}" TextColor="White"/>
+            <ActivityIndicator Color="White" IsRunning="{Binding Enviando}" IsVisible="{Binding Enviando}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
